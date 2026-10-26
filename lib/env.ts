@@ -7,8 +7,11 @@ function required(name: string, value: string | undefined) {
 
 export const env = {
   supabaseUrl: () => required("NEXT_PUBLIC_SUPABASE_URL", process.env.NEXT_PUBLIC_SUPABASE_URL),
-  supabaseAnonKey: () => required("NEXT_PUBLIC_SUPABASE_ANON_KEY", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
-  serviceRoleKey: () => required("SUPABASE_SERVICE_ROLE_KEY", process.env.SUPABASE_SERVICE_ROLE_KEY),
+  // chave publicável (nova) ou anon (antiga, desativada pelo Supabase até o fim de 2026)
+  supabaseAnonKey: () =>
+    required("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
+  // chave secreta (nova) ou service_role (antiga); só no servidor
+  serviceRoleKey: () => required("SUPABASE_SECRET_KEY", process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY),
   authEmailDomain: () => process.env.AUTH_EMAIL_DOMAIN || "central-beneficios.local",
 };
 

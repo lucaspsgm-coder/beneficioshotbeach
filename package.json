@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "seed:admin": "node --env-file=.env.local scripts/seed-admin.mjs",
     "test": "node --test --experimental-strip-types tests/*.test.ts",
-    "db:setup": "node --env-file=.env.local scripts/setup-db.mjs"
+    "db:setup": "node --env-file=.env.local scripts/setup-db.mjs",
+    "db:demo": "node --env-file=.env.local scripts/run-sql.mjs supabase/seed_demo.sql"
   },
   "dependencies": {
     "@fontsource-variable/public-sans": "^5.1.0",

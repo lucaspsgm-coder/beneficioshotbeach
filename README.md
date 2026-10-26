@@ -14,7 +14,7 @@ Next.js 15 (App Router) · TypeScript · Tailwind · componentes no padrão shad
 2. Crie o banco de um destes jeitos:
    - **Pelo VS Code (recomendado):** preencha `DATABASE_URL` no `.env.local` (Supabase → botão **Connect** → **Session pooler** → copie a URI e troque `[YOUR-PASSWORD]` pela senha do banco) e rode `npm run db:setup`. Ele aplica tudo na ordem e pode ser rodado de novo sem duplicar.
    - **Pelo SQL Editor do Supabase:** rode os arquivos de `supabase/migrations/` na ordem, de `0001` a `0006`.
-3. (Opcional) Para testar com dados fictícios, rode `supabase/seed_demo.sql`. O próprio arquivo traz o bloco para apagar depois.
+3. (Opcional) Para testar com dados fictícios, rode `npm run db:demo` (ou o arquivo `supabase/seed_demo.sql` no SQL Editor). O próprio arquivo traz o bloco para apagar depois.
 4. Em **Authentication → Sign In / Providers**:
    - desligue **Allow new users to sign up** (só o admin cria usuários);
    - desligue **Confirm email** (o login é por usuário, não por e-mail).
@@ -24,7 +24,7 @@ Next.js 15 (App Router) · TypeScript · Tailwind · componentes no padrão shad
 
 ```bash
 npm install
-cp .env.example .env.local      # preencha com as chaves de Project Settings → API
+cp .env.example .env.local      # preencha com as chaves de Settings → API Keys
 npm run db:setup                # cria as tabelas, regras e auditoria no Supabase
 npm run seed:admin              # cria o administrador inicial
 npm run dev                     # http://localhost:3000
@@ -36,7 +36,7 @@ O administrador inicial é criado com `ADMIN_USERNAME` e `ADMIN_PASSWORD` do `.e
 
 ### 3. Publicar (Vercel)
 
-Importe o repositório na Vercel e cadastre as mesmas variáveis do `.env.local`. A `SUPABASE_SERVICE_ROLE_KEY` fica só no servidor; nunca a coloque em variável `NEXT_PUBLIC_`.
+Importe o repositório na Vercel e cadastre as mesmas variáveis do `.env.local`. A `SUPABASE_SECRET_KEY` fica só no servidor; nunca a coloque em variável `NEXT_PUBLIC_`. Use as chaves novas (publicável e secreta): as antigas `anon` e `service_role` serão desativadas pelo Supabase até o fim de 2026, mas ainda funcionam se preenchidas em `NEXT_PUBLIC_SUPABASE_ANON_KEY` e `SUPABASE_SERVICE_ROLE_KEY`.
 
 ### Ordem de uso no go-live
 

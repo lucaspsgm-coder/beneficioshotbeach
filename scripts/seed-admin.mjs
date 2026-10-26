@@ -11,14 +11,14 @@ const ADMIN = {
 };
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const serviceKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 const domain = process.env.AUTH_EMAIL_DOMAIN || "central-beneficios.local";
 if (!ADMIN.password) {
   console.error("Defina ADMIN_PASSWORD no .env.local antes de rodar.");
   process.exit(1);
 }
 if (!url || !serviceKey) {
-  console.error("Configure NEXT_PUBLIC_SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY no .env.local antes de rodar.");
+  console.error("Configure NEXT_PUBLIC_SUPABASE_URL e SUPABASE_SECRET_KEY no .env.local antes de rodar.");
   process.exit(1);
 }
 

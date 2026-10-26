@@ -20,7 +20,7 @@ if (!url) {
 const dir = join(dirname(fileURLToPath(import.meta.url)), "..", "supabase", "migrations");
 const files = readdirSync(dir).filter((f) => f.endsWith(".sql")).sort();
 
-const client = new pg.Client({ connectionString: url, ssl: { rejectUnauthorized: false } });
+const client = new pg.Client({ connectionString: url, ssl: url.includes("localhost") || url.includes("127.0.0.1") ? false : { rejectUnauthorized: false } });
 try {
   await client.connect();
 } catch (e) {
