@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 1, "ss01" 1;
+  }
+  body {
+    @apply bg-paper text-ink;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-petrol-500 ring-offset-2 ring-offset-paper;
+  }
+  ::selection {
+    @apply bg-petrol-100;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
