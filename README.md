@@ -11,8 +11,9 @@ Next.js 15 (App Router) · TypeScript · Tailwind · componentes no padrão shad
 ### 1. Criar o projeto no Supabase
 
 1. Crie um projeto em [supabase.com](https://supabase.com).
-2. Em **SQL Editor**, rode os arquivos de `supabase/migrations/` **nesta ordem**, um de cada vez:
-   `0001_estrutura.sql` → `0002_regras.sql` → `0003_seguranca.sql` → `0004_parametros_iniciais.sql` → `0005_apoio.sql` → `0006_visoes.sql`
+2. Crie o banco de um destes jeitos:
+   - **Pelo VS Code (recomendado):** preencha `DATABASE_URL` no `.env.local` (Supabase → botão **Connect** → **Session pooler** → copie a URI e troque `[YOUR-PASSWORD]` pela senha do banco) e rode `npm run db:setup`. Ele aplica tudo na ordem e pode ser rodado de novo sem duplicar.
+   - **Pelo SQL Editor do Supabase:** rode os arquivos de `supabase/migrations/` na ordem, de `0001` a `0006`.
 3. (Opcional) Para testar com dados fictícios, rode `supabase/seed_demo.sql`. O próprio arquivo traz o bloco para apagar depois.
 4. Em **Authentication → Sign In / Providers**:
    - desligue **Allow new users to sign up** (só o admin cria usuários);
@@ -24,6 +25,7 @@ Next.js 15 (App Router) · TypeScript · Tailwind · componentes no padrão shad
 ```bash
 npm install
 cp .env.example .env.local      # preencha com as chaves de Project Settings → API
+npm run db:setup                # cria as tabelas, regras e auditoria no Supabase
 npm run seed:admin              # cria o administrador inicial
 npm run dev                     # http://localhost:3000
 ```
